@@ -39,17 +39,22 @@ main = do
                 True () -> Success ();
                 wrong   -> TestFail (wrong)
         |]
+        initial = removeUnusedGlobals (initialState "main" prog)
     ansiSupport <- hSupportsANSI stdout
     if ansiSupport || True
-        then runStg prettyprintAnsi prog
-        else runStg prettyprint     prog
+        then runStg prettyprintAnsi prog initial
+        else runStg prettyprint     prog initial
 
-runStg :: (forall a. PrettyAnsi a => a -> Text) -> Program -> IO ()
-runStg ppr prog =
+runStg
+    :: (forall a. PrettyAnsi a => a -> Text)
+    -> Program
+    -> StgState
+    -> IO ()
+runStg ppr prog initial =
     let states = evalsUntil 1000
                             (HaltIf (const False))
                             (PerformGc (const True))
-                            (initialState "main" prog)
+                            initial
         line = T.replicate 80 "-"
         fatLine = T.replicate 80 "="
     in do

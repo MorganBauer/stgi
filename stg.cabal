@@ -31,6 +31,7 @@ library
                      , Stg.Machine.GarbageCollection
                      , Stg.Machine.Heap
                      , Stg.Machine.InfoDetails
+                     , Stg.Machine.RemoveUnusedGlobals
                      , Stg.Machine.Types
                      , Stg.Parser
                      , Stg.Parser.Parser
@@ -77,6 +78,7 @@ test-suite stg-test
                      , Test.Machine.Evaluate.Small
                      , Test.Machine.GarbageCollection
                      , Test.Machine.Heap
+                     , Test.Machine.RemoveUnusedGlobals
                      , Test.Orphans
                      , Test.Orphans.Language
                      , Test.Orphans.Machine

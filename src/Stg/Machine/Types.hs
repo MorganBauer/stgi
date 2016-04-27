@@ -327,17 +327,21 @@ data InfoShort =
 
     | GarbageCollection
       -- ^ A garbage collection step, in which no ordinary evaluation is done.
+
+    | RemoveUnusedGlobals
+      -- ^ Unused global variables were removed from the state.
     deriving (Eq, Ord, Show, Generic)
 
 instance Pretty InfoShort where
     pretty = \case
-        HaltedByPredicate -> "Halting predicate held"
-        NoRulesApply      -> "No further rules apply"
-        MaxStepsExceeded  -> "Maximum number of steps exceeded"
-        StateError err    -> "Errorenous state: " <+> pretty err
-        StateTransiton t  -> "State transition:" <+> pretty t
-        StateInitial      -> "Initial state"
-        GarbageCollection -> "Garbage collection"
+        HaltedByPredicate   -> "Halting predicate held"
+        NoRulesApply        -> "No further rules apply"
+        MaxStepsExceeded    -> "Maximum number of steps exceeded"
+        StateError err      -> "Errorenous state: " <+> pretty err
+        StateTransiton t    -> "State transition:" <+> pretty t
+        StateInitial        -> "Initial state"
+        GarbageCollection   -> "Garbage collection"
+        RemoveUnusedGlobals -> "Remove unused globals"
 
 data StateTransition =
       Enter_NonUpdatableClosure

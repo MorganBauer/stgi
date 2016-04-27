@@ -16,6 +16,9 @@ module Stg.Machine (
     -- * Garbage collection
     garbageCollect,
     PerformGc(..),
+
+    -- * Remove unused globals
+    removeUnusedGlobals,
 ) where
 
 
@@ -23,6 +26,7 @@ module Stg.Machine (
 import           Stg.Language
 import           Stg.Machine.Evaluate
 import           Stg.Machine.GarbageCollection
+import           Stg.Machine.RemoveUnusedGlobals
 import           Stg.Machine.Types
 
 
